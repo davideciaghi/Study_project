@@ -1,6 +1,6 @@
 # Import the urx and logging libraries
 import urx    
-import logging 
+import logging
 
 
 if __name__ == "__main__":
@@ -22,12 +22,46 @@ if __name__ == "__main__":
 
         pose[2] += l
         
-       
         print(UR.movej(pose,acc=a,vel=v)) # It seems to return something
-
         UR.movel(pose, acc=a, vel=v)
 
+        grabScrewdriver()
 
+        
+        
 
     finally:
         UR.close()
+
+
+
+
+    def grabScrewdriver():
+
+        dz = 0.01 #[1 cm]
+        v = 0.05
+        a = 0.3
+
+        pose = UR.getl()
+
+        pose[2] += dz   # Elevate z by dz
+
+        pointSequence = {"centralpos":[],
+                  "openGripper": 2,
+                  "midpoint":[],
+                  "backpoint":[],
+                  "high":[],
+                  "low":[],
+                  "closeGripper": 5,
+                  "elevate":[]}
+
+        for pose in pointSequence:
+            
+            if pose=="centralpos" or pose=="midpoint" or pose=="backpoint":
+                UR.movej(pointSequence[pose], acc=a, vel=v)
+            else:
+                UR.movel(pointSequence[pose], acc=a, vel=v)
+            
+            print("Approaching position:",pose)
+
+        return print("Screw driver has been grabbed correctly.")
