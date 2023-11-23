@@ -5,11 +5,11 @@ import logging
 
 if __name__ == "__main__":
     
-    logging.baseConfig(level=logging.WARN)
-    UR = urx.Robot("")
+    logging.basicConfig(level=logging.WARN)
+    UR = urx.Robot("10.10.238.32")
 
-    UR.set_tcp((0,0,0,0,0,0)) # Set robot-flange to tool-tip transformation
-    UR.set_payload(0.5,(0,0,0)) # [Kg]
+    # UR.set_tcp((0,0,0,0,0,0)) # Set robot-flange to tool-tip transformation
+    # UR.set_payload(0.5,(0,0,0)) # [Kg]
 
     try:
 
@@ -22,14 +22,12 @@ if __name__ == "__main__":
 
         pose[2] += l
         
-        print(UR.movej(pose,acc=a,vel=v)) # It seems to return something
+        # print(UR.movej(pose,acc=a,vel=v)) # It seems to return something
         UR.movel(pose, acc=a, vel=v)
 
-        grabScrewdriver()
-
-        
         
 
+        
     finally:
         UR.close()
 
