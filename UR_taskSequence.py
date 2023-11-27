@@ -6,7 +6,7 @@ from urx.robotiq_two_finger_gripper import RobotiqScript as Rs
 
 def grabScrewdriver(v,a):
     
-    gr._set_gripper_speed(200)
+    # gr._set_gripper_speed(200)
     gripper.gripper_action(0)
 
     jointSequence = {
@@ -37,7 +37,7 @@ def grabScrewdriver(v,a):
 
 def releaseScrewdriver(v,a):
 
-    gr._set_gripper_speed(50)
+    # gr._set_gripper_speed(50)
 
     jointSequence = {
         "centralpos":[-0.7125352064715784, -1.9114339987384241, -1.4501970450030726, -2.9188717047320765, -0.7277739683734339, -9.428933032343181],
