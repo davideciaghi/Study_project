@@ -5,7 +5,8 @@ from urx.robotiq_two_finger_gripper import Robotiq_Two_Finger_Gripper as Rq
 from urx.robotiq_two_finger_gripper import RobotiqScript as Rs
 
 def grabScrewdriver(v,a):
-
+    
+    gr._set_gripper_speed(200)
     gripper.gripper_action(0)
 
     jointSequence = {
@@ -22,12 +23,9 @@ def grabScrewdriver(v,a):
 
     for pose in jointSequence:
 
-        if pose=="openGripper":
-            gripper.gripper_action(0)
-            print("Opening gripper")
-        elif pose=="closeGripper":
-            gripper.gripper_action(255)
-            print("Closing gripper")
+        if pose=="openGripper" or pose=="closeGripper":
+            gripper.gripper_action(jointSequence[pose])
+            print(pose)
         else:
             print("Approaching position:",pose)
             UR.movej(jointSequence[pose], acc=a, vel=v)
@@ -37,31 +35,30 @@ def grabScrewdriver(v,a):
 
 
 
-def releaseScrewdriver():
+def releaseScrewdriver(v,a):
 
-    dz = 0.01 #[1 cm]
-    v = 0.05
-    a = 0.3
-    
-    pose = UR.getl()
-    pose[2] += dz   # Elevate z by dz
+    gr._set_gripper_speed(50)
 
-    pointSequence = {
-        "centralpos":[0.14399096174567205, -0.5701271907177382, 0.24997350528014362, -0.0021609031633453893, 2.2206992704504036, -2.2205633485310026],
-        "highPose":[],
-        "releasePose":[],
-        "openGripper":gripper.open_gripper(),
-        "appHigh":[0.46399688577674664, -0.29997716581269485, 0.060031263254164656, -0.014747276861985101, 2.2105444084801285, -2.2107479026130066],
-        "appBack":[0.46400239838184265, -0.2200169662179669, 0.060023600957931925, -0.014664490682634956, 2.2105937021495023, -2.210761078026726],
-        "midpoint":[0.26627255497056584, -0.22330771092450646, 0.1700024990336996, -0.19309731464075824, -2.151371268066894, 2.1333976878513914],
-        "centralpos":[0.14399096174567205, -0.5701271907177382, 0.24997350528014362, -0.0021609031633453893, 2.2206992704504036, -2.2205633485310026]}
+    jointSequence = {
+        "centralpos":[-0.7125352064715784, -1.9114339987384241, -1.4501970450030726, -2.9188717047320765, -0.7277739683734339, -9.428933032343181],
+        "grabbedHigh2":[0.24144993722438812, -3.1574657599078577, 0.38404321670532227, -3.5075443426715296, 0.21888214349746704, -9.427242167780193],
+        "grabbedHigh3":[0.24083873629570007, -3.454433266316549, 0.44026899337768555, -3.2615225950824183, 0.2194809764623642, -9.432315238306316],
+        "releasePose":[0.2407548427581787, -3.476398770009176, 0.44449806213378906, -3.243415180836813, 0.21946899592876434, -9.432638772318157],
+        "openGripper": 0,
+        "appHigh2":[0.23586416244506836, -3.3844860235797327, 0.48784446716308594, -3.3819730917560022, 0.21454833447933197, -9.425323851892742],
+        "appHigh1":[0.30100327730178833, -3.36135703722109, 0.4381599426269531, -3.3559463659869593, 0.2793298065662384, -9.424927600214275],
+        "appBack":[0.40609559416770935, -3.3239977995501917, 0.35812854766845703, -3.3140061537372034, 0.3841108977794647, -9.424280532190593],
+        "midpoint":[0.5760637521743774, -2.065845314656393, -1.6096809546100062, -2.592222515736715, 0.7270185351371765, -9.421797879526409],
+        "centralpos":[-0.7125352064715784, -1.9114339987384241, -1.4501970450030726, -2.9188717047320765, -0.7277739683734339, -9.428933032343181]}
 
-    for pose in pointSequence:
-        if pose=="centralpos" or pose=="midpoint" or pose=="highPose":
-            UR.movej(pointSequence[pose], acc=a, vel=v)
+    for pose in jointSequence:
+
+        if pose=="openGripper" or pose=="closeGripper":
+            gripper.gripper_action(jointSequence[pose])
+            print(pose)
         else:
-            UR.movel(pointSequence[pose], acc=a, vel=v)
-        print("Approaching position:",pose)
+            print("Approaching position:",pose)
+            UR.movej(jointSequence[pose], acc=a, vel=v)
 
     return print("Screw driver has been released correctly.")   
 
@@ -85,16 +82,17 @@ if __name__ == "__main__":
 
     try:
 
-        v = 0.25
+        v = 0.3
         a = 0.3
 
         grabScrewdriver(v,a)
+        releaseScrewdriver(0.15,0.3)
 
 
-        # pose = UR.getl() # Tool Center Pose of the robot
+        #pose = UR.getl() # Tool Center Pose of the robot
 
-        # joints = UR.getj()
-        # print(joints)
+        #joints = UR.getj()
+        #print(joints)
 
         # UR.movel(pose, acc=a, vel=v)
 
