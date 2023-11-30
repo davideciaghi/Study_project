@@ -1,8 +1,10 @@
 # Import the urx and logging libraries
 import urx    
 import logging
+import time
 from urx.robotiq_two_finger_gripper import Robotiq_Two_Finger_Gripper as Rq
 from urx.robotiq_two_finger_gripper import RobotiqScript as Rs
+
 
 def grabScrewdriver(v,a):
     
@@ -30,7 +32,6 @@ def grabScrewdriver(v,a):
             print("Approaching position:",pose)
             UR.movej(jointSequence[pose], acc=a, vel=v)
             
-
     return print("Screw driver has been grabbed correctly.")
 
 
@@ -82,11 +83,13 @@ if __name__ == "__main__":
 
     try:
 
-        v = 0.3
+        v = 0.5
         a = 0.3
 
+
         grabScrewdriver(v,a)
-        releaseScrewdriver(0.15,0.3)
+
+        releaseScrewdriver(v,a)
 
 
         #pose = UR.getl() # Tool Center Pose of the robot
