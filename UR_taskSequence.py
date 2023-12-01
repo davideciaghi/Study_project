@@ -4,6 +4,7 @@ import logging
 import time
 from urx.robotiq_two_finger_gripper import Robotiq_Two_Finger_Gripper as Rq
 from urx.robotiq_two_finger_gripper import RobotiqScript as Rs
+import screwdriverControl
 
 
 def grabScrewdriver(v,a):
@@ -72,14 +73,13 @@ def releaseScrewdriver(v,a):
 if __name__ == "__main__":
     
     logging.basicConfig(level=logging.WARN)
-    UR = urx.Robot("10.10.238.32")
-
     
-    # Creazione di un'istanza per la glasse gripper
-    gripper = Rq(UR) # L'argomento "robot" va passato perchè richiesto dalla functione __init__() 
-    gr = Rs()
-
+    UR = urx.Robot("10.10.238.32") # Istanza per a classe Robot
+    gripper = Rq(UR) # Istanza per la classe Gripper
+    screwdriver = screwdriverControl.Screwdriver(UR) # Istance for Screwdriver CLASS
     
+
+    screwdriver.untighten()
 
     try:
 
@@ -88,6 +88,8 @@ if __name__ == "__main__":
 
 
         grabScrewdriver(v,a)
+
+
 
         releaseScrewdriver(v,a)
 
