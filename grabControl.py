@@ -7,12 +7,12 @@ from urx.robotiq_two_finger_gripper import RobotiqScript as Rs
 
 
 
-class Handling(object):
+class Handling():
 
     def __init__(self,robot):
-        
+
         self.robot = robot
-        self.gripper = Rq(self.robot) # Istanza "self.gripper" per la classe Gripper
+        self.gr = Rq(self.robot)
 
 
     def grabScrewdriver(self,v,a):
@@ -20,7 +20,7 @@ class Handling(object):
         Sequence of actions to grab the screwdriver, starting from a central point
         """
         # gr._set_gripper_speed(200)
-        self.gripper.gripper_action(0)
+        self.gr.gripper_action(0)
 
         jointSequence = {
             "centralpos":[-0.7125352064715784, -1.9114339987384241, -1.4501970450030726, -2.9188717047320765, -0.7277739683734339, -9.428933032343181],
@@ -37,7 +37,7 @@ class Handling(object):
         for pose in jointSequence:
 
             if pose=="openGripper" or pose=="closeGripper":
-                self.gripper.gripper_action(jointSequence[pose])
+                self.gr.gripper_action(jointSequence[pose])
                 print(pose)
             else:
                 print("Approaching position:",pose)
@@ -51,7 +51,6 @@ class Handling(object):
         """
         Sequence of actions to realease the screwdriver, starting from a central point
         """
-        # gr.
         # gr._set_gripper_speed(50)
         jointSequence = {
             "centralpos":[-0.7125352064715784, -1.9114339987384241, -1.4501970450030726, -2.9188717047320765, -0.7277739683734339, -9.428933032343181],
@@ -68,7 +67,7 @@ class Handling(object):
         for pose in jointSequence:
 
             if pose=="openGripper" or pose=="closeGripper":
-                self.gripper.gripper_action(jointSequence[pose])
+                self.gr.gripper_action(jointSequence[pose])
                 print(pose)
             else:
                 print("Approaching position:",pose)
