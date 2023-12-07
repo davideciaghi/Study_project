@@ -9,7 +9,9 @@ if __name__ == "__main__":
 
     try:
 
-        pose = UR.getl() # Tool Center Pose of the robot
+        pose = UR.getj()
+
+        # pose = UR.getl() # Tool Center Pose of the robot
         print("TCP robot pose:", pose)
 
         

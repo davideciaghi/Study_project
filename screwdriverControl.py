@@ -18,6 +18,8 @@ class Screwdriver():
         """
         Screwdriver tighten1
         """
+        self.robot.set_digital_out(2,True) # Disable emergency input
+        self.robot.set_digital_out(0,False) # Disable STOP Motor
         if self.robot.get_digital_in(0)==0:
 
             print("Start tightening")
@@ -28,6 +30,8 @@ class Screwdriver():
         """
         Screwdriver untighten
         """
+        self.robot.set_digital_out(2,True) # Disable emergency input
+        self.robot.set_digital_out(0,False) # Disable STOP Motor
         if self.robot.get_digital_in(0)==0:
 
             print("Start tightening")
