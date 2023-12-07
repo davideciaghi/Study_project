@@ -44,4 +44,13 @@ class Screwdriver():
         self.robot.set_digital_out(1,False) # DO1 - Tightening
         self.robot.set_digital_out(3,False) # DO3 - Untighten
 
-
+    def setSpeed(self,flag):
+        """
+        Set the speed to HIGH or LOW
+        """
+        if flag=="Low":
+            self.robot.set_digital_out(4,True) # Set speed LOW
+            print("Set speed to LOW")
+        elif flag=="High":
+            self.robot.set_digital_out(4,False) # Set speed HIGH
+            print("Set speed to HIGH")
