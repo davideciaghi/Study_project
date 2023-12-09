@@ -6,27 +6,28 @@ import time
 from screwdriverControl import Screwdriver
 from grabControl import Handling
 
+import pistonScrewSequence as pSS
+
 
 
 if __name__ == "__main__":
     
     logging.basicConfig(level=logging.WARN)
 
-    UR = urx.Robot("10.10.238.32")
-    gripper = Handling(UR)
-    screwdriver = Screwdriver(UR)
+    UR = urx.Robot("10.10.238.32") # Istanza per robot
+    gripper = Handling(UR) # Istanza per afferrare l'avvitatore
+    screwdriver = Screwdriver(UR) # Istanza per avvitatore
 
 
-
-    # robot = urx.Robot("10.10.238.32")
-    # screwdriver = Screwdriver("10.10.238.32") # Istanza per a classe Screwdriver
-    # gripper = Handling("10.10.238.32",robot) # Istanza per a classe Handling
-    
     try:
 
         v = 0.5
         a = 0.3
+
+        pSS.screw(UR,screwdriver)
         
+
+
         # gripper.releaseScrewdriver(v,a)
         # gripper.grabScrewdriver(v,a)
         # UR.movej(center, acc=a, vel=v)
