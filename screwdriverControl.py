@@ -34,7 +34,7 @@ class Screwdriver():
         self.robot.set_digital_out(0,False) # Disable STOP Motor
         if self.robot.get_digital_in(0)==0:
 
-            print("Start tightening")
+            print("Start untightening")
             self.robot.set_digital_out(3,True) # DO3 - Untighten
         
 

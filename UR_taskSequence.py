@@ -23,33 +23,15 @@ if __name__ == "__main__":
 
         v = 0.5
         a = 0.3
-
+        
         pSS.screw(UR,screwdriver)
-        
-
-
-        # gripper.releaseScrewdriver(v,a)
-        # gripper.grabScrewdriver(v,a)
-        # UR.movej(center, acc=a, vel=v)
-
-
-        # screwdriver.setSpeed("Low")
-        # screwdriver.tighten()
-        
-        # time.sleep(2)
-        # screwdriver.stop()
-
-
-        
+        pSS.unscrew(UR,screwdriver)
 
         # gripper.grabScrewdriver(v,a)
         # gripper.releaseScrewdriver(v,a)
 
 
 
-
-        
-              
     finally:
         
         UR.close()
