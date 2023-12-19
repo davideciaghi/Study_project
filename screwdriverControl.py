@@ -21,7 +21,6 @@ class Screwdriver():
         self.robot.set_digital_out(2,True) # Disable emergency input
         self.robot.set_digital_out(0,False) # Disable STOP Motor
         if self.robot.get_digital_in(0)==0:
-
             print("Start tightening")
             self.robot.set_digital_out(1,True) # DO1 - Tightening
 
@@ -33,10 +32,19 @@ class Screwdriver():
         self.robot.set_digital_out(2,True) # Disable emergency input
         self.robot.set_digital_out(0,False) # Disable STOP Motor
         if self.robot.get_digital_in(0)==0:
-
             print("Start untightening")
             self.robot.set_digital_out(3,True) # DO3 - Untighten
         
+    def clutch(self):
+        """
+        It returns True if the clutch is triggered, False otherwise
+        """
+        if self.robot.get_digital_in(2)==True: # DI2 - Clutch trigger
+            print("Clutch triggered")
+            return True
+        else:
+            return False
+
 
     def stop(self):
         """
@@ -47,6 +55,7 @@ class Screwdriver():
         self.robot.set_digital_out(0,True)  # Enable STOP Motor
         self.robot.set_digital_out(1,False) # DO1 - Tightening
         self.robot.set_digital_out(3,False) # DO3 - Untighten
+
 
     def setSpeed(self,flag):
         """

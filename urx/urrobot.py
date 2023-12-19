@@ -380,7 +380,7 @@ class URRobot(object):
         tpose = [round(i, self.max_float_length) for i in tpose]
         tpose.append(acc)
         tpose.append(vel)
-        tpose.append(radius)
+        tpose.append(radius)    
         return "{}({}[{},{},{},{},{},{}], a={}, v={}, r={})".format(command, prefix, *tpose)
 
     def movex(self, command, tpose,  acc=0.01, vel=0.01, wait=True, relative=False, threshold=None):

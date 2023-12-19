@@ -68,10 +68,7 @@ class Handling():
 
             if pose=="openGripper" or pose=="closeGripper":
                 # self.gr2._set_gripper_speed(10)
-                print("Status 1:",self.gr2._get_gripper_status())
                 self.gr.gripper_action(jointSequence[pose])
-                print("Status 2:",self.gr2._get_gripper_status())
-                time.sleep(2)
                 print(pose)
             else:
                 print("Approaching position:",pose)

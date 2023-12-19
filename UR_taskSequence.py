@@ -24,8 +24,12 @@ if __name__ == "__main__":
         v = 0.5
         a = 0.3
         
-        pSS.screw(UR,screwdriver)
+        # gripper.grabScrewdriver(v,a)
+
         pSS.unscrew(UR,screwdriver)
+        time.sleep(0.5)
+        pSS.screw(UR,screwdriver)
+
 
         # gripper.grabScrewdriver(v,a)
         # gripper.releaseScrewdriver(v,a)
