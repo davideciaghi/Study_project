@@ -35,7 +35,7 @@ class URRobot(object):
     Rmq: A program sent to the robot i executed immendiatly and any running program is stopped
     """
 
-    def __init__(self, host, use_rt=False, urFirm=None):
+    def __init__(self, host, use_rt=False, urFirm=5.1):
         self.logger = logging.getLogger("urx")
         self.host = host
         self.urFirm = urFirm

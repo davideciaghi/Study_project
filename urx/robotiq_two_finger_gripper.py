@@ -199,11 +199,9 @@ class Robotiq_Two_Finger_Gripper(object):
         urscript = self._get_new_urscript()
 
         # Move to the position
-        sleep = 2.0
+        sleep = 0.5 # Changed from 2.0 to 0.5
         urscript._set_gripper_position(value)
         urscript._sleep(sleep)
-
-        print("dfsv")
 
         # Send the script
         self.robot.send_program(urscript())
